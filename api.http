@@ -14,3 +14,11 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/assets
+
+###
+
+GET http://localhost:3000/wallets
+
+###
+
+POST http://localhost:3000/wallets
