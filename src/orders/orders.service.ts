@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { InitTransactionDto, InputExecuteTransactionDto } from './order.dto';
-import { OrderStatus } from '@prisma/client';
+import { OrderStatus, OrderType } from '@prisma/client';
 
 @Injectable()
 export class OrdersService {
@@ -74,7 +74,10 @@ export class OrdersService {
               },
             },
             data: {
-              shares: walletAsset.shares + input.negotiated_shares,
+              shares:
+                order.type === OrderType.BUY
+                  ? walletAsset.shares + input.negotiated_shares
+                  : walletAsset.shares - input.negotiated_shares,
             },
           });
         } else {
