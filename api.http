@@ -44,7 +44,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/orders
+POST http://localhost:3000/wallets/wallet1/orders
 Content-Type: application/json
 
 {
@@ -53,4 +53,31 @@ Content-Type: application/json
   "shares": 5,
   "price": 100,
   "type": "BUY"
+}
+
+###
+
+GET http://localhost:3000/wallets/wallet1/orders
+
+###
+
+POST http://localhost:3000/orders/execute
+Content-Type: application/json
+
+{
+  "order_id": "x",
+  "status": "OPEN",
+  "related_investor_id": "xx",
+  "broker_transaction_id": "xx",
+  "negotiated_shares": 5,
+  "price": 10
+}
+
+{
+  "order_id": "x",
+  "status": "OPEN",
+  "related_investor_id": "",
+  "broker_transaction_id": "",
+  "negotiated_shares": 5,
+  "price": 10
 }

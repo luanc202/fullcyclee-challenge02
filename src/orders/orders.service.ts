@@ -7,6 +7,26 @@ import { OrderStatus, OrderType } from '@prisma/client';
 export class OrdersService {
   constructor(private prismaService: PrismaService) {}
 
+  all(filter: { wallet_id: string }) {
+    return this.prismaService.order.findMany({
+      where: {
+        wallet_id: filter.wallet_id,
+      },
+      include: {
+        Transactions: true,
+        Asset: {
+          select: {
+            id: true,
+            symbol: true,
+          },
+        },
+      },
+      orderBy: {
+        updated_at: 'desc',
+      },
+    });
+  }
+
   initTransaction(input: InitTransactionDto) {
     return this.prismaService.order.create({
       data: {
